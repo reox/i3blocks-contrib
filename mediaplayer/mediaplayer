@@ -130,6 +130,14 @@ sub playerctl {
 
     push(@metadata, $title) if $title;
 
+    my $state = `playerctl $player_arg status`;
+    if ($state =~ "Playing") {
+        push(@metadata, "");
+    }
+    if ($state =~ "Paused") {
+        push(@metadata, "");
+    }
+
     print(join(" - ", @metadata)) if @metadata;
 }
 
